@@ -1,9 +1,11 @@
-const Header = (title, price) => {
+import mainLogo from "../../assets/img/pizza-logo.svg";
+
+export const Header = (title, price) => {
   return (
     <div className="header">
       <div className="container">
         <div className="header__logo">
-          <img width="38" src="img/pizza-logo.svg" alt="Pizza logo" />
+          <img width="38" src={mainLogo} alt="Pizza logo" />
           <div>
             <h1>React Pizza</h1>
             <p>самая вкусная пицца во вселенной</p>
@@ -49,5 +51,3 @@ const Header = (title, price) => {
     </div>
   );
 };
-
-export default Header;

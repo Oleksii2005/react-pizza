@@ -1,4 +1,4 @@
-const Sort = () => {
+export const Sort = () => {
   return (
     <div className="sort">
       <div className="sort__label">
@@ -27,5 +27,3 @@ const Sort = () => {
     </div>
   );
 };
-
-export default Sort;
