@@ -22,7 +22,7 @@ function App() {
               <PizzaBlock title="Celentano" price={205 + "kr"} />
               <PizzaBlock title="Mexicano" price={175 + "kr"} />
               <PizzaBlock title="4 seazons" price={230 + "kr"} />
-              <PizzaBlock title="Calcone" price={150 + "kr"} />
+              <PizzaBlock title="Calcone" price={155 + "kr"} />
             </div>
           </div>
         </div>
