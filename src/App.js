@@ -9,16 +9,16 @@ import ContentTitle from "./components/ContentTitle/ContentTitle";
 function App() {
   return (
     <div className="App">
-      <div class="wrapper">
+      <div className="wrapper">
         <Header />
-        <div class="content">
-          <div class="container">
-            <div class="content__top">
+        <div className="content">
+          <div className="container">
+            <div className="content__top">
               <Categories />
               <Sort />
             </div>
             <ContentTitle />
-            <div class="content__items">
+            <div className="content__items">
               <PizzaBlock title="Celentano" price={205 + "kr"} />
               <PizzaBlock title="Mexicano" price={175 + "kr"} />
               <PizzaBlock title="4 seazons" price={230 + "kr"} />
