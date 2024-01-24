@@ -5,12 +5,10 @@ export const Sort = () => {
   const [selected, setSelected] = useState(0);
   const list = ["популярности", "цене", "алфавиту"];
   const sortName = list[selected];
-
   const onCurrentType = (i) => {
     setSelected(i);
     setIsOpenPopup(false);
   };
-
   return (
     <div className="sort">
       <div className="sort__label">
@@ -29,7 +27,6 @@ export const Sort = () => {
         <b>Сортировка по:</b>
         <span onClick={() => setIsOpenPopup(!isOpenPopup)}>{sortName}</span>
       </div>
-
       {isOpenPopup && (
         <div className="sort__popup">
           <ul>

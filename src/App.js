@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./scss/app.scss";
 import { Header } from "./components/Header/Header";
 import { Categories } from "./components/Categories/Categories";
 import { Sort } from "./components/Sort/Sort";
 import { PizzaBlock } from "./components/PizzaBlock/PizzaBlock";
 import { ContentTitle } from "./components/ContentTitle/ContentTitle";
-import pizzas from "./assets/pizzas.json";
 
 function App() {
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+    fetch("https://65b04f592f26c3f2139cadc0.mockapi.io/items")
+      .then((res) => res.json())
+      .then((arr) => {
+        setItems(arr);
+      });
+  }, []);
+
   return (
     <div className="App">
       <div className="wrapper">
@@ -20,7 +28,7 @@ function App() {
             </div>
             <ContentTitle />
             <div className="content__items">
-              {pizzas.map((obj) => (
+              {items.map((obj) => (
                 <PizzaBlock key={obj.id} {...obj} />
               ))}
             </div>
@@ -32,9 +40,3 @@ function App() {
 }
 
 export default App;
-{
-  /* <PizzaBlock title="Celentano" price={205 + "kr"} />
-              <PizzaBlock title="Mexicano" price={175 + "kr"} />
-              <PizzaBlock title="4 seazons" price={230 + "kr"} />
-              <PizzaBlock title="Calcone" price={155 + "kr"} /> */
-}
