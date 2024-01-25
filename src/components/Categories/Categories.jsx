@@ -13,7 +13,7 @@ export const Categories = () => {
 
   return (
     <div className="categories">
-      <ul>
+      <ul className="categories__ul">
         {categories.map((value, i) => (
           <li
             key={i}

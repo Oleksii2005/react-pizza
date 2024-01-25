@@ -23,10 +23,12 @@ export const Content = () => {
         <Sort />
       </div>
       <ContentTitle />
-      <div className="content__items">
-        {isLoading
-          ? [...new Array(6)].map((_, i) => <Skeleton key={i} />)
-          : items.map((obj) => <PizzaBlock key={obj.id} {...obj} />)}
+      <div className="content__wrapper">
+        <ul className="content__items">
+          {isLoading
+            ? [...new Array(6)].map((_, i) => <Skeleton key={i} />)
+            : items.map((obj) => <PizzaBlock key={obj.id} {...obj} />)}
+        </ul>
       </div>
     </div>
   );

@@ -2,8 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import { Bucket } from "./components/Bucket/Bucket";
-// import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
+import { Bucket } from "./components/Bucket/Bucket";
+import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
