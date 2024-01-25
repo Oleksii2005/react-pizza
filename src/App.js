@@ -6,16 +6,14 @@ import { Route, Routes } from "react-router-dom";
 import { BucketPage } from "./pages/Bucket/Bucket";
 function App() {
   return (
-    <div className="App">
-      <div className="wrapper">
-        <Header />
-        <div className="content">
-          <Routes>
-            <Route path="/" element={<Content />} />
-            <Route path="/bucket" element={<BucketPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </div>
+    <div className="wrapper">
+      <Header />
+      <div className="content">
+        <Routes>
+          <Route path="/" element={<Content />} />
+          <Route path="/bucket" element={<BucketPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </div>
     </div>
   );

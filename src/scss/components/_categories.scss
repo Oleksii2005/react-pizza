@@ -27,12 +27,16 @@
       text-align: center;
     }
 
-    @media screen and (max-width: 766px) {
+    @media screen and (min-width: 531px) and (max-width: 767px) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+    }
+    @media screen and (max-width: 530px) {
       display: grid;
       grid-template-columns: 1fr;
       grid-template-rows: repeat(6, 1fr);
     }
-
     li {
       background-color: #f9f9f9;
       padding: 13px 30px;

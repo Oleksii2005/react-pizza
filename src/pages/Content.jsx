@@ -15,6 +15,7 @@ export const Content = () => {
         setItems(arr);
         setIsLoading(false);
       });
+    window.scroll(0, 0);
   }, []);
   return (
     <div className="container">
