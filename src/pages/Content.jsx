@@ -8,6 +8,7 @@ import { Skeleton } from "../components/PizzaBlock/Skeleton";
 export const Content = () => {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     fetch("https://65b04f592f26c3f2139cadc0.mockapi.io/items")
       .then((res) => res.json())

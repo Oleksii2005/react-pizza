@@ -11,9 +11,6 @@
 
   &__image {
     width: 260px;
-    @media screen and (max-width: 530px) {
-      display: none;
-    }
   }
 
   &__title {
