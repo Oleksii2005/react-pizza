@@ -1,7 +1,7 @@
 .root {
   position: relative;
 }
-.icon {
+.icon_search {
   opacity: 0.3;
   width: 24px;
   height: 24px;
@@ -20,6 +20,18 @@
   transition: all 0.15s ease-in-out;
   &:focus {
     border: 1px solid rgba(0, 0, 0, 0.3);
-    width: 400px;
+    // width: 400px;
+  }
+}
+.icon_close {
+  width: 18px;
+  height: 18px;
+  opacity: 0.3;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  &:hover {
+    opacity: 0.8;
+    cursor: pointer;
   }
 }
