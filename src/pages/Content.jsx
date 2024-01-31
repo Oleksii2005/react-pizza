@@ -5,7 +5,7 @@ import { PizzaBlock } from "../components/PizzaBlock/PizzaBlock";
 import { Sort } from "../components/Sort/Sort";
 import { Skeleton } from "../components/PizzaBlock/Skeleton";
 
-export const Content = () => {
+export const Content = ({ searchValue }) => {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [categoryId, setCategoryId] = useState(0);
@@ -20,17 +20,27 @@ export const Content = () => {
     const category = categoryId > 0 ? `category=${categoryId}` : "";
     const sortBy = sortType.sortProperty.replace("-", "");
     const order = sortType.sortProperty.includes("-") ? "asc" : "desc";
+    const search = searchValue ? `&search=${searchValue}` : "";
 
-    fetch(`${mainUrl}?${category}&sortBy=${sortBy}&order=${order}`)
+    fetch(`${mainUrl}?${category}&sortBy=${sortBy}&order=${order}${search}`)
       .then((res) => res.json())
       .then((arr) => {
         setItems(arr);
         setIsLoading(false);
       });
     window.scroll(0, 0);
-  }, [categoryId, sortType]);
+  }, [categoryId, sortType, searchValue]);
 
-  console.log(categoryId, sortType);
+  const skeletons = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
+
+  const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
+
+  // .filter((obj) => {
+  //       if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
+  //         return true;
+  //       }
+  //       return false;
+  //     })
 
   return (
     <div className="container">
@@ -43,11 +53,7 @@ export const Content = () => {
       </div>
       <ContentTitle />
       <div className="content__wrapper">
-        <ul className="content__items">
-          {isLoading
-            ? [...new Array(6)].map((_, i) => <Skeleton key={i} />)
-            : items.map((obj) => <PizzaBlock key={obj.id} {...obj} />)}
-        </ul>
+        <ul className="content__items">{isLoading ? skeletons : pizzas}</ul>
       </div>
     </div>
   );
