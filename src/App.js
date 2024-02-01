@@ -4,20 +4,25 @@ import { Content } from "./pages/Content";
 import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
 import { Route, Routes } from "react-router-dom";
 import { BucketPage } from "./pages/Bucket/Bucket";
-import { useState } from "react";
+import { createContext, useState } from "react";
+
+export const SearchContext = createContext();
+
 function App() {
   const [searchValue, setSearchValue] = useState("");
 
   return (
     <div className="wrapper">
-      <Header searchValue={searchValue} setSearchValue={setSearchValue} />
-      <div className="content">
-        <Routes>
-          <Route path="/" element={<Content searchValue={searchValue} />} />
-          <Route path="/bucket" element={<BucketPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </div>
+      <SearchContext.Provider value={{ searchValue, setSearchValue }}>
+        <Header />
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Content />} />
+            <Route path="/bucket" element={<BucketPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </div>
+      </SearchContext.Provider>
     </div>
   );
 }
