@@ -4,11 +4,13 @@ import { ContentTitle } from "../components/ContentTitle/ContentTitle";
 import { PizzaBlock } from "../components/PizzaBlock/PizzaBlock";
 import { Sort } from "../components/Sort/Sort";
 import { Skeleton } from "../components/PizzaBlock/Skeleton";
+import { Pagination } from "../components/Pagination/Pagination";
 
 export const Content = ({ searchValue }) => {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [categoryId, setCategoryId] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const [sortType, setSortType] = useState({
     name: "популярности",
     sortProperty: "rating",
@@ -22,14 +24,16 @@ export const Content = ({ searchValue }) => {
     const order = sortType.sortProperty.includes("-") ? "asc" : "desc";
     const search = searchValue ? `&search=${searchValue}` : "";
 
-    fetch(`${mainUrl}?${category}&sortBy=${sortBy}&order=${order}${search}`)
+    fetch(
+      `${mainUrl}?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
+    )
       .then((res) => res.json())
       .then((arr) => {
         setItems(arr);
         setIsLoading(false);
       });
     window.scroll(0, 0);
-  }, [categoryId, sortType, searchValue]);
+  }, [categoryId, sortType, searchValue, currentPage]);
 
   const skeletons = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
 
@@ -55,6 +59,7 @@ export const Content = ({ searchValue }) => {
       <div className="content__wrapper">
         <ul className="content__items">{isLoading ? skeletons : pizzas}</ul>
       </div>
+      <Pagination onChangePage={(number) => setCurrentPage(number)} />
     </div>
   );
 };
