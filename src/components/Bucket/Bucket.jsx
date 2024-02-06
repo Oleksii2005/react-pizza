@@ -89,7 +89,7 @@ export const Bucket = () => {
             </div>
             <div className="cart__item-info">
               <h3>Сырный цыпленок</h3>
-              <p>тонкое тесто, 26 см.</p>
+              <p>тонкое тесто, 25 см.</p>
             </div>
             <div className="cart__item-count">
               <div className="button button--outline button--circle cart__item-count-minus">
