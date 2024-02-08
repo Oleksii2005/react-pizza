@@ -4,12 +4,12 @@ export const Sort = ({ value, onChangeSort }) => {
   const [isOpenPopup, setIsOpenPopup] = useState(false);
   // const [selected, setSelected] = useState(0);
   const list = [
-    { name: "популярности (DESC)у", sortProperty: "rating" },
-    { name: "популярности (ASC)в", sortProperty: "-rating" },
-    { name: "цене (DESC)у", sortProperty: "price" },
-    { name: "цене (ASC)в", sortProperty: "-price" },
-    { name: "алфавиту (DESC)у", sortProperty: "title" },
-    { name: "алфавиту (ASC)в", sortProperty: "-title" },
+    { name: "popularity (DESC)у", sortProperty: "rating" },
+    { name: "popularity (ASC)в", sortProperty: "-rating" },
+    { name: "price (DESC)у", sortProperty: "price" },
+    { name: "price (ASC)в", sortProperty: "-price" },
+    { name: "alphabet (DESC)у", sortProperty: "title" },
+    { name: "alphabet (ASC)в", sortProperty: "-title" },
   ];
 
   // const sortName = list[value].name;
@@ -32,7 +32,7 @@ export const Sort = ({ value, onChangeSort }) => {
             fill="#2C2C2C"
           />
         </svg>
-        <b>Сортировка по:</b>
+        <b>Sort by:</b>
         <span onClick={() => setIsOpenPopup(!isOpenPopup)}>{value.name}</span>
       </div>
       {isOpenPopup && (

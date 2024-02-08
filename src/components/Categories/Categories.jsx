@@ -1,14 +1,12 @@
-import { useState } from "react";
-
 export const Categories = ({ value, onChangeCategory }) => {
   // const [activeIndex, setActiveIndex] = useState(0);
   const categories = [
-    "Все",
-    "Мясные",
-    "Вегетарианская",
-    "Гриль",
-    "Острые",
-    "Закрытые",
+    "All",
+    "Meat pizza",
+    "Vegetarian",
+    "Grill",
+    "Spicy",
+    "Closed",
   ];
 
   return (

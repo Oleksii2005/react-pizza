@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export const PizzaBlock = ({ title, price, imageUrl, sizes, types }) => {
-  const typeName = ["тонкое", "традиционное"];
+  const typeName = ["thin", "traditional"];
   const [selectedTypeIndex, setSelectedType] = useState(0);
   const [selectedSizeIndex, setSelectedSize] = useState(0);
 
@@ -28,13 +28,13 @@ export const PizzaBlock = ({ title, price, imageUrl, sizes, types }) => {
               onClick={() => setSelectedSize(i)}
               className={selectedSizeIndex === i ? "active" : ""}
             >
-              {size} см.
+              {size} cm.
             </li>
           ))}
         </ul>
       </div>
       <div className="pizza-block__bottom">
-        <div className="pizza-block__price">от {price}kr</div>
+        <div className="pizza-block__price">from {price}kr</div>
         <button className="button button--outline button--add">
           <svg
             width="12"
