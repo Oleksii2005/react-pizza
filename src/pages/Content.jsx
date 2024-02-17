@@ -8,6 +8,7 @@ import { Pagination } from "../components/Pagination/Pagination";
 import { SearchContext } from "../App";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategoryId } from "../redux/slices/filterSlice";
+import axios from "axios";
 
 export const Content = () => {
   const dispatch = useDispatch();
@@ -33,13 +34,15 @@ export const Content = () => {
     const sortBy = sortType.replace("-", "");
     const order = sortType.includes("-") ? "asc" : "desc";
     const search = searchValue ? `&search=${searchValue}` : "";
-
-    fetch(
-      `${mainUrl}?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
-    )
-      .then((res) => res.json())
-      .then((arr) => {
-        setItems(arr);
+    const apiURL = `${mainUrl}?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`;
+    axios
+      .get(apiURL)
+      .then((res) => {
+        setItems(res.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
         setIsLoading(false);
       });
     window.scroll(0, 0);
