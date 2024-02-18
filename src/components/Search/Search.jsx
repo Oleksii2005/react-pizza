@@ -7,27 +7,24 @@ import { SearchContext } from "../../App";
 import styles from "./Search.module.scss";
 
 export const Search = () => {
-  const { searchValue, setSearchValue } = useContext(SearchContext);
-  const [value, setValue] = useState("");
-  const updateSearchValue = useCallback(
-    debounce(
-      (str) => {
-        setSearchValue(str);
-      },
-      1000,
-      []
-    )
-  );
-  const onChangeInput = (event) => {
-    setValue(event.target.value);
-    updateSearchValue(event.target.value);
-  };
-
+  const { setSearchValue } = useContext(SearchContext);
   const inputRef = useRef();
+  const [value, setValue] = useState("");
+
   const onClickClear = () => {
     setSearchValue("");
     setValue("");
     inputRef.current.focus();
+  };
+  const updateSearchValue = useCallback(
+    debounce((str) => {
+      setSearchValue(str);
+    }, 350),
+    []
+  );
+  const onChangeInput = (event) => {
+    setValue(event.target.value);
+    updateSearchValue(event.target.value);
   };
   return (
     <div className={styles.root}>
