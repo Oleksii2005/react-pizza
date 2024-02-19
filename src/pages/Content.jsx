@@ -40,27 +40,43 @@ export const Content = () => {
     dispatch(setCurrentPage(number));
   };
 
-  const fetchPizzas = () => {
+  const fetchPizzas = async () => {
     setIsLoading(true);
     const mainUrl = "https://65b04f592f26c3f2139cadc0.mockapi.io/items";
-    const category = categoryId > 0 ? `category=${categoryId}` : "";
+    const category = categoryId > 0 ? `&category=${categoryId}` : "";
     const sortBy = sortType.replace("-", "");
     const order = sortType.includes("-") ? "asc" : "desc";
     const search = searchValue ? `&search=${searchValue}` : "";
-    const apiURL = `${mainUrl}?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`;
-    axios
-      .get(apiURL)
-      .then((res) => {
-        setItems(res.data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        setIsLoading(false);
-        setItems([]);
-      });
-    window.scroll(0, 0);
+    const apiURL = `${mainUrl}?page=${currentPage}&limit=4${category}&sortBy=${sortBy}&order=${order}${search}`;
+
+    try {
+      const res = await axios.get(apiURL);
+      setItems(res.data);
+      setIsLoading(false);
+      window.scroll(0, 0);
+    } catch (error) {
+      setIsLoading(false);
+      alert("Error while receiving data..");
+      console.log(" error: ", error);
+    } finally {
+      setIsLoading(false);
+    }
+
+    // await axios
+    //   .get(apiURL)
+    //   .then((res) => {
+    //     setItems(res.data);
+    //     setIsLoading(false);
+    //     console.log("123");
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error fetching data:", error);
+    //     setIsLoading(false);
+    //     setItems([]);
+    //   });
+    // window.scroll(0, 0);
   };
+
   // Если изменили параметры и был первый рендер
   useEffect(() => {
     if (isMounted.current) {
