@@ -1,4 +1,3 @@
-import { eventWrapper } from "@testing-library/user-event/dist/utils";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSort } from "../../redux/slices/filterSlice";
