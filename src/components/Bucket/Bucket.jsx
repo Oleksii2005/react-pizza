@@ -1,16 +1,21 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { clearItems } from "../../redux/slices/bucketSlice";
+import { EmptyBucket } from "./EmptyBucket";
 import { PizzaItemBucket } from "./PizzaItemBucket";
 
 export const Bucket = () => {
+  const dispatch = useDispatch();
   const { totalPrice, items } = useSelector((state) => state.bucket);
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   const onClickClear = () => {
     if (window.confirm("Are you sure you want to clear your staff?"))
       dispatch(clearItems());
   };
-  const dispatch = useDispatch();
+  if (!totalPrice) {
+    return <EmptyBucket />;
+  }
+
   return (
     <div className="container container--cart">
       <div className="cart">

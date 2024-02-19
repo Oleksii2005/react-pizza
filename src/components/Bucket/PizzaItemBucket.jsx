@@ -9,6 +9,7 @@ export const PizzaItemBucket = ({
   price,
   count,
   imageUrl,
+  sizes,
 }) => {
   const dispatch = useDispatch();
   const onClickPlus = () => {
@@ -32,7 +33,9 @@ export const PizzaItemBucket = ({
       </div>
       <div className="cart__item-info">
         <h3>{title}</h3>
-        <p>{types}, 25 см.</p>
+        <p>
+          {types}, {sizes} см.
+        </p>
       </div>
       <div className="cart__item-count">
         <div

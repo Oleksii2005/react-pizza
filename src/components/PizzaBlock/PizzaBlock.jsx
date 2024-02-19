@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../../redux/slices/bucketSlice";
 
 const typeNames = ["thin", "traditional"];
+const sizes = [];
 export const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
   const dispatch = useDispatch();
   const bucketItem = useSelector((state) =>
@@ -20,7 +21,7 @@ export const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
       price,
       imageUrl,
       types: typeNames[selectedTypeIndex],
-      sizes: selectedSizeIndex,
+      sizes: sizes[selectedSizeIndex],
     };
     dispatch(addItem(item));
   };
