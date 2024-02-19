@@ -16,6 +16,7 @@ import {
 } from "../redux/slices/filterSlice";
 import qs from "qs";
 import axios from "axios";
+import { useRef } from "react";
 
 export const Content = () => {
   const { searchValue } = useContext(SearchContext);
@@ -23,7 +24,8 @@ export const Content = () => {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const isSearch = useRef(false);
+  const isMounted = useRef(false);
   const { categoryId, sort, currentPage } = useSelector(
     (state) => state.filter
   );
@@ -38,7 +40,7 @@ export const Content = () => {
     dispatch(setCurrentPage(number));
   };
 
-  useEffect(() => {
+  const fetchPizzas = () => {
     setIsLoading(true);
     const mainUrl = "https://65b04f592f26c3f2139cadc0.mockapi.io/items";
     const category = categoryId > 0 ? `category=${categoryId}` : "";
@@ -58,8 +60,20 @@ export const Content = () => {
         setItems([]);
       });
     window.scroll(0, 0);
-  }, [categoryId, sortType, searchValue, currentPage]);
-
+  };
+  // Если изменили параметры и был первый рендер
+  useEffect(() => {
+    if (isMounted.current) {
+      const queryString = qs.stringify({
+        sortProperty: sortType,
+        categoryId,
+        currentPage,
+      });
+      navigate(`?${queryString}`);
+    }
+    isMounted.current = true;
+  }, [categoryId, sortType, currentPage]);
+  // Если был первый рендер, то проверяем URL-параметры и сохраняем в redux
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
@@ -70,16 +84,17 @@ export const Content = () => {
           sort,
         })
       );
+      isSearch.current = true;
     }
   }, []);
+  // Если был первый рендер, то запрашиваем пиццы
   useEffect(() => {
-    const queryString = qs.stringify({
-      sortProperty: sortType,
-      categoryId,
-      currentPage,
-    });
-    navigate(`?${queryString}`);
-  }, [categoryId, sortType, currentPage]);
+    window.scrollTo(0, 0);
+    if (!isSearch.current) {
+      fetchPizzas();
+    }
+    isSearch.current = false;
+  }, [categoryId, sortType, searchValue, currentPage]);
 
   const skeletons = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
   const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
