@@ -43,6 +43,10 @@ const bucketSlice = createSlice({
     },
   },
 });
+export const selectBucket = (state) => state.bucket;
+
+export const selectBucketById = (id) => (state) =>
+  state.bucket.items.find((obj) => obj.id === id);
 
 export const { addItem, minusItem, removeItem, clearItems } =
   bucketSlice.actions;

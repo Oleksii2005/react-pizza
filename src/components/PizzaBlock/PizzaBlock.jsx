@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../../redux/slices/bucketSlice";
+import { selectBucketById } from "../../redux/slices/bucketSlice";
 
 const typeNames = ["thin", "traditional"];
-const sizes = [];
 export const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
   const dispatch = useDispatch();
-  const bucketItem = useSelector((state) =>
-    state.bucket.items.find((obj) => obj.id === id)
-  );
+  const bucketItem = useSelector(selectBucketById(id));
   const [selectedTypeIndex, setSelectedType] = useState(0);
   const [selectedSizeIndex, setSelectedSize] = useState(0);
 

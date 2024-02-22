@@ -10,26 +10,25 @@ import { Skeleton } from "../components/PizzaBlock/Skeleton";
 import { Pagination } from "../components/Pagination/Pagination";
 import { SearchContext } from "../App";
 import {
+  selectFilter,
   setCategoryId,
   setCurrentPage,
   setFilters,
 } from "../redux/slices/filterSlice";
 import qs from "qs";
 import { useRef } from "react";
-import { fetchPizzas } from "../redux/slices/pizzaSlice";
+import { fetchPizzas, selectPizzasData } from "../redux/slices/pizzaSlice";
 import { NotFound } from "../components/NotFound/NotFound";
 
 export const Content = () => {
-  const { searchValue } = useContext(SearchContext);
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isSearch = useRef(false);
   const isMounted = useRef(false);
-  const { items, status } = useSelector((state) => state.pizza);
-  const { categoryId, sort, currentPage } = useSelector(
-    (state) => state.filter
-  );
+  const { items, status } = useSelector(selectPizzasData);
+  const { categoryId, sort, currentPage, searchValue } =
+    useSelector(selectFilter);
   const sortType = sort.sortProperty;
 
   const onChangeCategory = (id) => {
@@ -90,7 +89,7 @@ export const Content = () => {
   // Если был первый рендер, то запрашиваем пиццы
   useEffect(() => {
     getPizzas();
-  }, []);
+  }, [categoryId, sortType, currentPage, searchValue]);
 
   const skeletons = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
   const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
