@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Categories } from "../components/Categories/Categories";
 import { ContentTitle } from "../components/ContentTitle/ContentTitle";
 import { PizzaBlock } from "../components/PizzaBlock/PizzaBlock";
@@ -8,7 +8,6 @@ import { Sort } from "../components/Sort/Sort";
 import { list } from "../components/Sort/Sort";
 import { Skeleton } from "../components/PizzaBlock/Skeleton";
 import { Pagination } from "../components/Pagination/Pagination";
-import { SearchContext } from "../App";
 import {
   selectFilter,
   setCategoryId,
@@ -92,7 +91,11 @@ export const Content = () => {
   }, [categoryId, sortType, currentPage, searchValue]);
 
   const skeletons = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
-  const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
+  const pizzas = items.map((obj) => (
+    <Link key={obj.id} to={`/pizza/${obj.id}`}>
+      <PizzaBlock {...obj} />
+    </Link>
+  ));
 
   return (
     <div className="container">

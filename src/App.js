@@ -5,6 +5,7 @@ import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
 import { Route, Routes } from "react-router-dom";
 import { BucketPage } from "./pages/Bucket/Bucket";
 import { createContext, useState } from "react";
+import { ItemPage } from "./components/ItemPage/ItemPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Content />} />
           <Route path="/bucket" element={<BucketPage />} />
+          <Route path="/pizza/:id" element={<ItemPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
