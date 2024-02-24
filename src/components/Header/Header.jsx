@@ -1,10 +1,12 @@
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import mainLogo from "../../assets/img/pizza-logo.svg";
 import { selectBucket } from "../../redux/slices/bucketSlice";
 import { Search } from "../Search/Search";
 
 export const Header = () => {
+  const location = useLocation();
+  console.log(location);
   const { items, totalPrice } = useSelector(selectBucket);
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   return (
@@ -22,7 +24,7 @@ export const Header = () => {
         <Search />
         <div className="header__cart">
           <Link to="/bucket" className="button button--cart">
-            <span>{totalPrice} kr</span>
+            <span>{totalPrice} €</span>
             <div className="button__delimiter"></div>
             <svg
               width="18"

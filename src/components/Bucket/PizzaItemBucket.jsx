@@ -84,7 +84,7 @@ export const PizzaItemBucket = ({
         </div>
       </div>
       <div className="cart__item-price">
-        <b>{price * count} kr</b>
+        <b>{price * count} €</b>
       </div>
       <div className="cart__item-remove">
         <div

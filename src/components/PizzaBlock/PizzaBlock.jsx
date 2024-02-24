@@ -53,7 +53,7 @@ export const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
         </ul>
       </div>
       <div className="pizza-block__bottom">
-        <div className="pizza-block__price">from {price}kr</div>
+        <div className="pizza-block__price">from {price} €</div>
         <button
           onClick={onClickAdd}
           className="button button--outline button--add"

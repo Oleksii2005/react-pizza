@@ -50,7 +50,7 @@ export const Bucket = () => {
                 strokeLinejoin="round"
               />
             </svg>
-            Корзина
+            Cart
           </h2>
           <div onClick={onClickClear} className="cart__clear">
             <svg
@@ -90,7 +90,7 @@ export const Bucket = () => {
               />
             </svg>
 
-            <span>Очистить корзину</span>
+            <span>Delete selected items</span>
           </div>
         </div>
         <div className="content__elements">
@@ -102,11 +102,11 @@ export const Bucket = () => {
           <div className="cart__bottom-details">
             <span>
               {" "}
-              Всего пицц: <b>{totalCount} шт.</b>{" "}
+              Total pizzas: <b>{totalCount} pcs.</b>{" "}
             </span>
             <span>
               {" "}
-              Сумма заказа: <b>{totalPrice} ₽</b>{" "}
+              Total price: <b>{totalPrice} €</b>{" "}
             </span>
           </div>
           <div className="cart__bottom-buttons">
@@ -130,10 +130,10 @@ export const Bucket = () => {
                 />
               </svg>
 
-              <span>Вернуться назад</span>
+              <span>Go back</span>
             </Link>
             <div className="button pay-btn">
-              <span>Оплатить сейчас</span>
+              <span>Pay now</span>
             </div>
           </div>
         </div>
