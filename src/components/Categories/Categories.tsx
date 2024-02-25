@@ -1,5 +1,14 @@
-export const Categories = ({ value, onChangeCategory }) => {
-  // const [activeIndex, setActiveIndex] = useState(0);
+import React from "react";
+
+type CategoriesProps = {
+  value: number;
+  onChangeCategory: any;
+};
+
+export const Categories: React.FC<CategoriesProps> = ({
+  value,
+  onChangeCategory,
+}) => {
   const categories = [
     "All",
     "Meat pizza",

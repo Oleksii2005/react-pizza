@@ -1,10 +1,27 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../../redux/slices/bucketSlice";
 import { selectBucketById } from "../../redux/slices/bucketSlice";
 
 const typeNames = ["thin", "traditional"];
-export const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
+
+type PizzaBlockProps = {
+  id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  types: number[];
+  sizes: number[];
+};
+
+export const PizzaBlock: React.FC<PizzaBlockProps> = ({
+  id,
+  title,
+  price,
+  imageUrl,
+  sizes,
+  types,
+}) => {
   const dispatch = useDispatch();
   const bucketItem = useSelector(selectBucketById(id));
   const [selectedTypeIndex, setSelectedType] = useState(0);

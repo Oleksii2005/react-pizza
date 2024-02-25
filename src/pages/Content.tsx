@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { Categories } from "../components/Categories/Categories";
@@ -19,7 +19,7 @@ import { useRef } from "react";
 import { fetchPizzas, selectPizzasData } from "../redux/slices/pizzaSlice";
 import { NotFound } from "../components/NotFound/NotFound";
 
-export const Content = () => {
+export const Content: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,13 +30,12 @@ export const Content = () => {
     useSelector(selectFilter);
   const sortType = sort.sortProperty;
 
-  const onChangeCategory = (id) => {
-    console.log(id);
-    dispatch(setCategoryId(id));
+  const onChangeCategory = (idx: number) => {
+    dispatch(setCategoryId(idx));
   };
 
-  const onChangePage = (number) => {
-    dispatch(setCurrentPage(number));
+  const onChangePage = (page: number) => {
+    dispatch(setCurrentPage(page));
   };
 
   const getPizzas = async () => {
@@ -48,6 +47,7 @@ export const Content = () => {
     const search = searchValue ? `&search=${searchValue}` : "";
 
     dispatch(
+      // @ts-ignore
       fetchPizzas({
         mainUrl,
         currentPage,
@@ -91,7 +91,7 @@ export const Content = () => {
   }, [categoryId, sortType, currentPage, searchValue]);
 
   const skeletons = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
-  const pizzas = items.map((obj) => (
+  const pizzas = items.map((obj: any) => (
     <Link key={obj.id} to={`/pizza/${obj.id}`}>
       <PizzaBlock {...obj} />
     </Link>

@@ -2,7 +2,17 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { addItem, minusItem, removeItem } from "../../redux/slices/bucketSlice";
 
-export const PizzaItemBucket = ({
+type CartItemProps = {
+  id: string;
+  title: string;
+  types: string;
+  price: number;
+  count: number;
+  imageUrl: string;
+  sizes: number;
+};
+
+export const CartItem: React.FC<CartItemProps> = ({
   id,
   title,
   types,

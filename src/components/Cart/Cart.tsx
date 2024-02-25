@@ -1,19 +1,22 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { clearItems } from "../../redux/slices/bucketSlice";
-import { EmptyBucket } from "./EmptyBucket";
-import { PizzaItemBucket } from "./PizzaItemBucket";
+import { clearItems, selectCart } from "../../redux/slices/bucketSlice";
+import { EmptyCart } from "./EmptyCart";
+import { CartItem } from "./CartItem";
 
-export const Bucket = () => {
+export const Cart = () => {
   const dispatch = useDispatch();
-  const { totalPrice, items } = useSelector((state) => state.bucket);
-  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+  const { totalPrice, items } = useSelector(selectCart);
+  const totalCount = items.reduce(
+    (sum: number, item: any) => sum + item.count,
+    0
+  );
   const onClickClear = () => {
     if (window.confirm("Are you sure you want to clear your staff?"))
       dispatch(clearItems());
   };
   if (!totalPrice) {
-    return <EmptyBucket />;
+    return <EmptyCart />;
   }
 
   return (
@@ -94,8 +97,8 @@ export const Bucket = () => {
           </div>
         </div>
         <div className="content__elements">
-          {items.map((item) => (
-            <PizzaItemBucket key={item.id} {...item} />
+          {items.map((item: any) => (
+            <CartItem key={item.id} {...item} />
           ))}
         </div>
         <div className="cart__bottom">

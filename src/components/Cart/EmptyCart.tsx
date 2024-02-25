@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import bucketEmptyImg from "../../assets/img/empty-bucket.png";
-export const EmptyBucket = () => {
+
+export const EmptyCart: React.FC = () => {
   return (
     <>
       <div className="cart cart--empty">
