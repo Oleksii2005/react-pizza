@@ -4,10 +4,15 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-export const ItemPage = () => {
-  const [pizza, setPizza] = useState();
+export const ItemPage: React.FC = () => {
+  const [pizza, setPizza] = useState<{
+    imageUrl: string;
+    title: string;
+    price: number;
+  }>();
   const { id } = useParams();
   const navigate = useNavigate();
+
   useEffect(() => {
     async function fetchItem() {
       try {
@@ -17,18 +22,19 @@ export const ItemPage = () => {
         setPizza(data);
       } catch (error) {
         alert("Error");
-        navigate("/");
+        navigate("/ ");
       }
     }
     fetchItem();
   }, []);
   if (!pizza) {
-    return "Loading...";
+    return <>Loading..</>;
   }
   return (
     <div className="container">
       <img src={pizza.imageUrl} alt="" />
       <h2>{pizza.title}</h2>
+      <p>{pizza.price}</p>
     </div>
   );
 };
