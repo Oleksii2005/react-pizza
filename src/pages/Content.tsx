@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Categories } from "../components/Categories/Categories";
 import { ContentTitle } from "../components/ContentTitle/ContentTitle";
 import { PizzaBlock } from "../components/PizzaBlock/PizzaBlock";
-import { Sort } from "../components/Sort/Sort";
+import { SortPopup } from "../components/Sort/Sort";
 import { list } from "../components/Sort/Sort";
 import { Skeleton } from "../components/PizzaBlock/Skeleton";
 import { Pagination } from "../components/Pagination/Pagination";
@@ -16,12 +16,17 @@ import {
 } from "../redux/slices/filterSlice";
 import qs from "qs";
 import { useRef } from "react";
-import { fetchPizzas, selectPizzasData } from "../redux/slices/pizzaSlice";
+import {
+  fetchPizzas,
+  SearchPizzaParams,
+  selectPizzasData,
+} from "../redux/slices/pizzaSlice";
 import { NotFound } from "../components/NotFound/NotFound";
+import { useAppDispatch } from "../redux/store";
 
 export const Content: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isSearch = useRef(false);
   const isMounted = useRef(false);
@@ -47,10 +52,9 @@ export const Content: React.FC = () => {
     const search = searchValue ? `&search=${searchValue}` : "";
 
     dispatch(
-      // @ts-ignore
       fetchPizzas({
         mainUrl,
-        currentPage,
+        currentPage: String(currentPage),
         category,
         sortBy,
         order,
@@ -60,48 +64,53 @@ export const Content: React.FC = () => {
   };
 
   // Если изменили параметры и был первый рендер
-  useEffect(() => {
-    if (isMounted.current) {
-      const queryString = qs.stringify({
-        sortProperty: sortType,
-        categoryId,
-        currentPage,
-      });
-      navigate(`?${queryString}`);
-    }
-    isMounted.current = true;
-  }, [categoryId, sortType, currentPage]);
-  // Если был первый рендер, то проверяем URL-параметры и сохраняем в redux
-  useEffect(() => {
-    if (window.location.search) {
-      const params = qs.parse(window.location.search.substring(1));
-      const sort = list.find((obj) => obj.sortProperty === params.sortProperty);
-      dispatch(
-        setFilters({
-          ...params,
-          sort,
-        })
-      );
-      isSearch.current = true;
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (isMounted.current) {
+  //     const queryString = qs.stringify({
+  //       sortProperty: sortType,
+  //       categoryId,
+  //       currentPage,
+  //     });
+  //     navigate(`?${queryString}`);
+  //   }
+  //   if (!window.location.search) {
+  //     dispatch(fetchPizzas({} as SearchPizzaParams));
+  //   }
+  //   // isMounted.current = true;
+  // }, [categoryId, sortType, currentPage]);
+  // // Если был первый рендер, то проверяем URL-параметры и сохраняем в redux
+  // useEffect(() => {
+  //   if (window.location.search) {
+  //     const params = qs.parse(
+  //       window.location.search.substring(1) as string
+  //     ) as SearchPizzaParams;
+  //     const sort = list.find((obj) => obj.sortProperty === params.sortBy);
+
+  //     dispatch(
+  //       setFilters({
+  //         searchValue: params.search,
+  //         categoryId: Number(params.category),
+  //         currentPage: Number(params.currentPage),
+  //         sort: sort || list[0],
+  //       })
+  //     );
+  //     isSearch.current = true;
+  //   }
+  // }, []);
+
   // Если был первый рендер, то запрашиваем пиццы
   useEffect(() => {
     getPizzas();
   }, [categoryId, sortType, currentPage, searchValue]);
 
   const skeletons = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
-  const pizzas = items.map((obj: any) => (
-    <Link key={obj.id} to={`/pizza/${obj.id}`}>
-      <PizzaBlock {...obj} />
-    </Link>
-  ));
+  const pizzas = items.map((obj: any) => <PizzaBlock {...obj} />);
 
   return (
     <div className="container">
       <div className="content__top">
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
-        <Sort />
+        <SortPopup />
       </div>
       <ContentTitle />
       <div className="content__wrapper">
