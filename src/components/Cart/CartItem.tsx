@@ -6,7 +6,8 @@ import {
   minusItem,
   removeItem,
 } from "../../redux/slices/bucketSlice";
-
+import clsx from "clsx";
+import useWhyDidYouUpdate from "ahooks/lib/useWhyDidYouUpdate";
 type CartItemProps = {
   id: string;
   title: string;
@@ -53,9 +54,13 @@ export const CartItemBlock: React.FC<CartItemProps> = ({
         </p>
       </div>
       <div className="cart__item-count">
-        <div
+        <button
+          disabled={count === 1}
           onClick={onClickMinus}
-          className="button button--outline button--circle cart__item-count-minus"
+          className={clsx(
+            "button button--outline button--circle cart__item-count-minus",
+            { "cart__item-count-minus--disabled": count === 1 }
+          )}
         >
           <svg
             width="10"
@@ -73,10 +78,10 @@ export const CartItemBlock: React.FC<CartItemProps> = ({
               fill="#EB5A1E"
             />
           </svg>
-        </div>
+        </button>
 
         <b className="number">{count}</b>
-        <div
+        <button
           onClick={onClickPlus}
           className="button button--outline button--circle cart__item-count-plus"
         >
@@ -96,7 +101,7 @@ export const CartItemBlock: React.FC<CartItemProps> = ({
               fill="#EB5A1E"
             />
           </svg>
-        </div>
+        </button>
       </div>
       <div className="cart__item-price">
         <b>{price * count} €</b>

@@ -14,6 +14,9 @@ type SortList = {
 type PopupClick = MouseEvent & {
   composedPath(): Node[];
 };
+type SortPopupProps = {
+  value: Sort;
+};
 export const list: SortList[] = [
   { name: "popularity (DESC)у", sortProperty: SortPropertyEnum.RATING_DESC },
   { name: "popularity (ASC)в", sortProperty: SortPropertyEnum.RATING_ASC },
@@ -23,9 +26,8 @@ export const list: SortList[] = [
   { name: "alphabet (ASC)в", sortProperty: SortPropertyEnum.TITLE_ASC },
 ];
 
-export const SortPopup = () => {
+export const SortPopup: React.FC<SortPopupProps> = React.memo(({ value }) => {
   const dispatch = useDispatch();
-  const sort = useSelector(selectSort);
   const sortRef = useRef<HTMLDivElement>(null);
   const [isOpenPopup, setIsOpenPopup] = useState(false);
 
@@ -63,7 +65,7 @@ export const SortPopup = () => {
           />
         </svg>
         <b>Sort by:</b>
-        <span onClick={() => setIsOpenPopup(!isOpenPopup)}>{sort.name}</span>
+        <span onClick={() => setIsOpenPopup(!isOpenPopup)}>{value.name}</span>
       </div>
       {isOpenPopup && (
         <div className="sort__popup">
@@ -73,7 +75,7 @@ export const SortPopup = () => {
                 key={i}
                 onClick={() => onCurrentType(obj)}
                 className={
-                  sort.sortProperty === obj.sortProperty ? "active" : ""
+                  value.sortProperty === obj.sortProperty ? "active" : ""
                 }
               >
                 {obj.name}
@@ -84,4 +86,4 @@ export const SortPopup = () => {
       )}
     </div>
   );
-};
+});

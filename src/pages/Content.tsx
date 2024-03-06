@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { Categories } from "../components/Categories/Categories";
@@ -35,13 +35,12 @@ export const Content: React.FC = () => {
     useSelector(selectFilter);
   const sortType = sort.sortProperty;
 
-  const onChangeCategory = (idx: number) => {
-    dispatch(setCategoryId(idx));
-  };
-
   const onChangePage = (page: number) => {
     dispatch(setCurrentPage(page));
   };
+  const onChangeCategory = useCallback((idx: number) => {
+    dispatch(setCategoryId(idx));
+  }, []);
 
   const getPizzas = async () => {
     setIsLoading(true);
@@ -104,13 +103,13 @@ export const Content: React.FC = () => {
   }, [categoryId, sortType, currentPage, searchValue]);
 
   const skeletons = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
-  const pizzas = items.map((obj: any) => <PizzaBlock {...obj} />);
+  const pizzas = items.map((obj: any) => <PizzaBlock key={obj.id} {...obj} />);
 
   return (
     <div className="container">
       <div className="content__top">
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
-        <SortPopup />
+        <SortPopup value={sort} />
       </div>
       <ContentTitle />
       <div className="content__wrapper">
