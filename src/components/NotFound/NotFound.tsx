@@ -1,16 +1,15 @@
-import { Description, Span, Title, Wrapper } from "./NotFound.styled";
-
+import styles from "./NotFound.module.scss";
 export const NotFound = () => {
   return (
-    <Wrapper>
-      <Title>
-        <Span>🙃</Span>
+    <div className={styles.wrapper}>
+      <h1>
+        <span className={styles.span}>🙃</span>
         <br />
         Nothing found
-      </Title>
-      <Description>
+      </h1>
+      <p className={styles.description}>
         Unfortunately, this page is not available in our online store.
-      </Description>
-    </Wrapper>
+      </p>
+    </div>
   );
 };
