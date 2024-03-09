@@ -5,24 +5,18 @@ import { Categories } from "../components/Categories/Categories";
 import { ContentTitle } from "../components/ContentTitle/ContentTitle";
 import { PizzaBlock } from "../components/PizzaBlock/PizzaBlock";
 import { SortPopup } from "../components/Sort/Sort";
-import { list } from "../components/Sort/Sort";
 import { Skeleton } from "../components/PizzaBlock/Skeleton";
 import { Pagination } from "../components/Pagination/Pagination";
-import {
-  selectFilter,
-  setCategoryId,
-  setCurrentPage,
-  setFilters,
-} from "../redux/slices/filterSlice";
+
 import qs from "qs";
 import { useRef } from "react";
-import {
-  fetchPizzas,
-  SearchPizzaParams,
-  selectPizzasData,
-} from "../redux/slices/pizzaSlice";
+
 import { NotFound } from "../components/NotFound/NotFound";
 import { useAppDispatch } from "../redux/store";
+import { selectFilter } from "../redux/filter/selectors";
+import { setCategoryId, setCurrentPage } from "../redux/filter/slice";
+import { selectPizzasData } from "../redux/pizza/selectors";
+import { fetchPizzas } from "../redux/pizza/asyncActions";
 
 export const Content: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);

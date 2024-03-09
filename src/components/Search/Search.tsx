@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 import { useState } from "react";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { setSearchValue } from "../../redux/slices/filterSlice";
+import { setSearchValue } from "../../redux/filter/slice";
 import styles from "./Search.module.scss";
 
 export const Search: React.FC = () => {

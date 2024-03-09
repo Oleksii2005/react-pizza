@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { addItem, CartItem } from "../../redux/slices/bucketSlice";
-import { selectBucketById } from "../../redux/slices/bucketSlice";
+import { selectcartById } from "../../redux/cart/selectors";
+import { addItem } from "../../redux/cart/slice";
+import { CartItem } from "../../redux/cart/types";
 
 const typeNames = ["thin", "traditional"];
 
@@ -24,11 +25,11 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({
   types,
 }) => {
   const dispatch = useDispatch();
-  const bucketItem = useSelector(selectBucketById(id));
+  const cartItem = useSelector(selectcartById(id));
   const [selectedTypeIndex, setSelectedType] = useState(0);
   const [selectedSizeIndex, setSelectedSize] = useState(0);
 
-  const addedCount = bucketItem ? bucketItem.count : 0;
+  const addedCount = cartItem ? cartItem.count : 0;
 
   const onClickAdd = () => {
     const item: CartItem = {
