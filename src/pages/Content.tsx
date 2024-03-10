@@ -1,12 +1,6 @@
 import React, { useState, useEffect, useContext, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-// import { Categories } from "../components/Categories/Categories";
-// import { ContentTitle } from "../components/ContentTitle/ContentTitle";
-// import { PizzaBlock } from "../components/PizzaBlock/PizzaBlock";
-// import { SortPopup } from "../components/Sort/Sort";
-// import { Skeleton } from "../components/PizzaBlock/Skeleton";
-// import { Pagination } from "../components/Pagination/Pagination";
 import {
   Cart,
   ContentTitle,
@@ -17,10 +11,9 @@ import {
   Skeleton,
   Pagination,
 } from "../components/index";
-import qs from "qs";
+// import qs from "qs";
 import { useRef } from "react";
 
-// import { NotFound } from "../components/NotFound/NotFound";
 import { useAppDispatch } from "../redux/store";
 import { selectFilter } from "../redux/filter/selectors";
 import { setCategoryId, setCurrentPage } from "../redux/filter/slice";
