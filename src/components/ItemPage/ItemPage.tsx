@@ -3,8 +3,9 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { Loader } from "../../loader/Loader";
 
-export const ItemPage: React.FC = () => {
+const ItemPage: React.FC = () => {
   const [pizza, setPizza] = useState<{
     imageUrl: string;
     title: string;
@@ -28,7 +29,11 @@ export const ItemPage: React.FC = () => {
     fetchItem();
   }, []);
   if (!pizza) {
-    return <>Loading..</>;
+    return (
+      <>
+        <Loader />
+      </>
+    );
   }
   return (
     <div className="container">
@@ -38,3 +43,4 @@ export const ItemPage: React.FC = () => {
     </div>
   );
 };
+export default ItemPage;
