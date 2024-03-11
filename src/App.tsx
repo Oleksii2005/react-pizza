@@ -5,9 +5,10 @@ import { Content } from "./pages/Content";
 import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
 import { Layout } from "./layouts/Layout";
 import { Loader } from "./loader/Loader";
+import ItemPage from "./components/ItemPage/ItemPage";
 
 const Cart = React.lazy(() => import("./pages/Cart/CartPage"));
-const ItemPage = React.lazy(() => import("./components/ItemPage/ItemPage"));
+// const ItemPage = React.lazy(() => import("./components/ItemPage/ItemPage"));
 
 function App() {
   return (
