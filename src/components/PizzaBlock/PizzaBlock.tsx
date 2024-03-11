@@ -69,7 +69,7 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({
               onClick={() => setSelectedSize(i)}
               className={selectedSizeIndex === i ? "active" : ""}
             >
-              {size} cm.
+              {size} sm.
             </li>
           ))}
         </ul>
