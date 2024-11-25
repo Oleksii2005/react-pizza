@@ -1,6 +1,6 @@
+import "./scss/app.scss";
 import { Route, Routes } from "react-router-dom";
 import React, { Suspense } from "react";
-import "./scss/app.scss";
 import { Content } from "./pages/Content";
 import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
 import { Layout } from "./layouts/Layout";

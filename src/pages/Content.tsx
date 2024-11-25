@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
-  Cart,
   ContentTitle,
   NotFound,
   Categories,
@@ -11,9 +10,7 @@ import {
   Skeleton,
   Pagination,
 } from "../components/index";
-import qs from "qs";
 import { useRef } from "react";
-
 import { useAppDispatch } from "../redux/store";
 import { selectFilter } from "../redux/filter/selectors";
 import { setCategoryId, setCurrentPage } from "../redux/filter/slice";
@@ -40,7 +37,7 @@ export const Content: React.FC = () => {
 
   const getPizzas = async () => {
     setIsLoading(true);
-    const mainUrl = "https://65b04f592f26c3f2139cadc0.mockapi.io/items";
+    const mainUrl = "https://6744afc7b4e2e04abea33c8d.mockapi.io/items";
     const category = categoryId > 0 ? `&category=${categoryId}` : "";
     const sortBy = sortType.replace("-", "");
     const order = sortType.includes("-") ? "asc" : "desc";
@@ -58,42 +55,6 @@ export const Content: React.FC = () => {
     );
   };
 
-  // Если изменили параметры и был первый рендер
-  // useEffect(() => {
-  //   if (isMounted.current) {
-  //     const queryString = qs.stringify({
-  //       sortProperty: sortType,
-  //       categoryId,
-  //       currentPage,
-  //     });
-  //     navigate(`?${queryString}`);
-  //   }
-  //   if (!window.location.search) {
-  //     dispatch(fetchPizzas({} as SearchPizzaParams));
-  //   }
-  //   // isMounted.current = true;
-  // }, [categoryId, sortType, currentPage]);
-  // // Если был первый рендер, то проверяем URL-параметры и сохраняем в redux
-  // useEffect(() => {
-  //   if (window.location.search) {
-  //     const params = qs.parse(
-  //       window.location.search.substring(1) as string
-  //     ) as SearchPizzaParams;
-  //     const sort = list.find((obj) => obj.sortProperty === params.sortBy);
-
-  //     dispatch(
-  //       setFilters({
-  //         searchValue: params.search,
-  //         categoryId: Number(params.category),
-  //         currentPage: Number(params.currentPage),
-  //         sort: sort || list[0],
-  //       })
-  //     );
-  //     isSearch.current = true;
-  //   }
-  // }, []);
-
-  // Если был первый рендер, то запрашиваем пиццы
   useEffect(() => {
     getPizzas();
   }, [categoryId, sortType, currentPage, searchValue]);
